@@ -29,11 +29,12 @@ app.post('/api/chat', async (req, res) => {
             const genAI = new GoogleGenerativeAI(apiKey);
             let result;
             try {
-                const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+                // Sử dụng model mới nhất (Năm 2026)
+                const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
                 result = await model.generateContent(prompt);
             } catch (err) {
-                // Fallback to gemini-pro if 1.5 flash is not available for this key
-                const modelFallback = genAI.getGenerativeModel({ model: "gemini-pro" });
+                // Nếu lỗi, thử model khác
+                const modelFallback = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
                 result = await modelFallback.generateContent(prompt);
             }
             const response = await result.response;
