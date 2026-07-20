@@ -268,7 +268,10 @@ function renderEndpointCard(ep) {
       <div class="endpoint-card-header">
         <span class="method-badge ${ep.method}">${ep.method}</span>
         <span class="endpoint-url">${ep.url}</span>
-        <div class="endpoint-actions">
+        <button class="copy-small-btn" onclick="navigator.clipboard.writeText('${BASE_URL}${ep.url}'); this.innerHTML='<i class=\\'fas fa-check\\'></i>'; setTimeout(() => this.innerHTML='<i class=\\'far fa-copy\\'></i>', 2000)" title="Copy URL" style="background:transparent; color:#888; border:none; cursor:pointer; margin-left: 10px; font-size: 1rem;">
+          <i class="far fa-copy"></i>
+        </button>
+        <div class="endpoint-actions" style="margin-left: auto;">
           <button class="try-btn" data-ep="${ep.id}"><i class="fas fa-bolt"></i> Thử ngay</button>
         </div>
       </div>
@@ -333,7 +336,24 @@ function openModal(epId) {
 }
 
 function updateModalUrl() {
-  // Modal URL has been removed
+  if (!currentEndpoint) return;
+  const params = {};
+  document.querySelectorAll('#modalParams input, #modalParams textarea').forEach(input => {
+    params[input.dataset.key] = input.value;
+  });
+  const url = currentEndpoint.buildUrl(params);
+  document.getElementById('modalUrlDisplay').textContent = url;
+}
+
+function copyModalUrl() {
+  const urlText = document.getElementById('modalUrlDisplay').textContent;
+  navigator.clipboard.writeText(urlText).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.innerHTML = '<i class="fas fa-check" style="color: #2ecc71;"></i>';
+    setTimeout(() => {
+      btn.innerHTML = '<i class="far fa-copy"></i>';
+    }, 2000);
+  });
 }
 
 function closeModal() {

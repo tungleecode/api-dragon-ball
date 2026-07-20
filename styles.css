@@ -284,6 +284,11 @@ main { flex: 1; padding: 3rem 2rem; max-width: 1000px; margin: 0 auto; width: 10
 .modal-close-btn:hover { background: var(--accent-red); color: #fff; border-color: #ffb3c6; transform: rotate(90deg);}
 
 .modal-body { padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1.2rem; background: rgba(10, 0, 20, 0.95); }
+.modal-url-row { display: flex; align-items: center; gap: 12px; background: rgba(0, 0, 0, 0.6); padding: 12px 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 10px; }
+.modal-url-row code { flex: 1; font-size: 1.05rem; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.copy-btn, .copy-small-btn { background: transparent; color: #aaa; border: none; cursor: pointer; font-size: 1.2rem; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; }
+.copy-btn:hover, .copy-small-btn:hover { transform: scale(1.3); color: var(--primary-color) !important; text-shadow: 0 0 15px rgba(255, 77, 148, 0.8); }
+
 .modal-desc { font-size: 1rem; color: #ccc; line-height: 1.6; }
 
 .modal-url-display { display: flex; align-items: center; background: #000; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; overflow: hidden; margin-bottom: 10px;}
