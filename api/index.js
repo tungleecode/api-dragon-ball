@@ -12,58 +12,127 @@ app.use(express.json());
 // ══════════════════════════════════════════════════
 // 🤖 GEMINI AI ROUTE
 // ══════════════════════════════════════════════════
-app.post('/api/chat', async (req, res) => {
+app.post('/api/goku', async (req, res) => {
     const { prompt } = req.body;
-
-    if (!prompt) {
-        return res.status(400).json({ 
-            success: false, 
-            error: { code: 400, message: 'Vui lòng cung cấp "prompt" trong body JSON.' } 
-        });
-    }
+    if (!prompt) return res.status(400).json({ success: false, error: { code: 400, message: 'Thiếu prompt' } });
 
     try {
         const apiKey = process.env.GEMINI_API_KEY;
-
         if (apiKey) {
             const genAI = new GoogleGenerativeAI(apiKey);
             let result;
             try {
-                // Sử dụng model mới nhất (Năm 2026)
-                const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-                result = await model.generateContent(prompt);
+                result = await genAI.getGenerativeModel({ model: "gemini-2.5-flash" }).generateContent(prompt);
             } catch (err) {
-                // Nếu lỗi, thử model khác
-                const modelFallback = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
-                result = await modelFallback.generateContent(prompt);
+                result = await genAI.getGenerativeModel({ model: "gemini-2.5-pro" }).generateContent(prompt);
             }
-            const response = await result.response;
-            const text = response.text();
-
-            // Trả về JSON cực kỳ đơn giản theo ý bạn
-            return res.json({
-                reply: text
-            });
-        } 
-        
-        else {
-            // Simulated Delay (1.5 seconds) for Mock Mode
+            return res.send(await result.response.text());
+        } else {
             await new Promise(resolve => setTimeout(resolve, 1500));
-
-            return res.json({
-                reply: "Đây là phản hồi giả lập vì máy chủ chưa được cấu hình GEMINI_API_KEY. Vui lòng thiết lập biến môi trường trên Vercel để kết nối với AI thực tế."
-            });
+            return res.send("Thiếu cấu hình GEMINI_API_KEY.");
         }
     } catch (error) {
-        console.error("Gemini API Error:", error);
-        res.status(500).json({ 
-            success: false, 
-            error: { 
-                code: 500, 
-                message: 'Lỗi máy chủ khi gọi Gemini API. Hãy kiểm tra lại cấu hình.',
-                details: error.message || error.toString()
-            } 
-        });
+        res.status(500).json({ success: false, error: { code: 500, message: 'Lỗi kết nối Gemini AI 1.' } });
+    }
+});
+
+// ═════ API KEY 2 ═════
+app.post('/api/vegeta', async (req, res) => {
+    const { prompt } = req.body;
+    if (!prompt) return res.status(400).json({ success: false, error: { code: 400, message: 'Thiếu prompt' } });
+
+    try {
+        const apiKey = process.env.GEMINI_API_KEY_2;
+        if (apiKey) {
+            const genAI = new GoogleGenerativeAI(apiKey);
+            let result;
+            try {
+                result = await genAI.getGenerativeModel({ model: "gemini-2.5-flash" }).generateContent(prompt);
+            } catch (err) {
+                result = await genAI.getGenerativeModel({ model: "gemini-2.5-pro" }).generateContent(prompt);
+            }
+            return res.send(await result.response.text());
+        } else {
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            return res.send("Thiếu cấu hình GEMINI_API_KEY_2.");
+        }
+    } catch (error) {
+        res.status(500).json({ success: false, error: { code: 500, message: 'Lỗi kết nối Gemini AI 2.' } });
+    }
+});
+
+// ═════ API KEY 3 ═════
+app.post('/api/broly', async (req, res) => {
+    const { prompt } = req.body;
+    if (!prompt) return res.status(400).json({ success: false, error: { code: 400, message: 'Thiếu prompt' } });
+
+    try {
+        const apiKey = process.env.GEMINI_API_KEY_3;
+        if (apiKey) {
+            const genAI = new GoogleGenerativeAI(apiKey);
+            let result;
+            try {
+                result = await genAI.getGenerativeModel({ model: "gemini-2.5-flash" }).generateContent(prompt);
+            } catch (err) {
+                result = await genAI.getGenerativeModel({ model: "gemini-2.5-pro" }).generateContent(prompt);
+            }
+            return res.send(await result.response.text());
+        } else {
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            return res.send("Thiếu cấu hình GEMINI_API_KEY_3.");
+        }
+    } catch (error) {
+        res.status(500).json({ success: false, error: { code: 500, message: 'Lỗi kết nối Gemini AI 3.' } });
+    }
+});
+
+// ═════ API KEY 4 ═════
+app.post('/api/gohan', async (req, res) => {
+    const { prompt } = req.body;
+    if (!prompt) return res.status(400).json({ success: false, error: { code: 400, message: 'Thiếu prompt' } });
+
+    try {
+        const apiKey = process.env.GEMINI_API_KEY_4;
+        if (apiKey) {
+            const genAI = new GoogleGenerativeAI(apiKey);
+            let result;
+            try {
+                result = await genAI.getGenerativeModel({ model: "gemini-2.5-flash" }).generateContent(prompt);
+            } catch (err) {
+                result = await genAI.getGenerativeModel({ model: "gemini-2.5-pro" }).generateContent(prompt);
+            }
+            return res.send(await result.response.text());
+        } else {
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            return res.send("Thiếu cấu hình GEMINI_API_KEY_4.");
+        }
+    } catch (error) {
+        res.status(500).json({ success: false, error: { code: 500, message: 'Lỗi kết nối Gemini AI 4.' } });
+    }
+});
+
+// ═════ API KEY 5 ═════
+app.post('/api/piccolo', async (req, res) => {
+    const { prompt } = req.body;
+    if (!prompt) return res.status(400).json({ success: false, error: { code: 400, message: 'Thiếu prompt' } });
+
+    try {
+        const apiKey = process.env.GEMINI_API_KEY_5;
+        if (apiKey) {
+            const genAI = new GoogleGenerativeAI(apiKey);
+            let result;
+            try {
+                result = await genAI.getGenerativeModel({ model: "gemini-2.5-flash" }).generateContent(prompt);
+            } catch (err) {
+                result = await genAI.getGenerativeModel({ model: "gemini-2.5-pro" }).generateContent(prompt);
+            }
+            return res.send(await result.response.text());
+        } else {
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            return res.send("Thiếu cấu hình GEMINI_API_KEY_5.");
+        }
+    } catch (error) {
+        res.status(500).json({ success: false, error: { code: 500, message: 'Lỗi kết nối Gemini AI 5.' } });
     }
 });
 

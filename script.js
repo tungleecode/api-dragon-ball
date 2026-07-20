@@ -20,21 +20,21 @@ const API_DATA = [
     description: 'Kết nối với bộ não thần thánh của Rosé AI. Đóng vai trò Proxy giúp bảo mật tuyệt đối hệ thống.',
     endpoints: [
       {
-        id: 'gemini-chat',
-        name: 'Gửi tin nhắn (Chat)',
+        id: 'api-goku',
+        name: 'Hỏi đáp với Goku',
         method: 'POST',
-        url: '/api/chat', // Tương lai bạn sẽ tạo route này ở backend
+        url: '/api/goku',
         description: 'Gửi một câu hỏi (prompt) lên server và nhận phản hồi trí tuệ từ Rosé.',
         params: [
           { key: 'prompt', label: 'Câu hỏi (Prompt)', placeholder: 'Ví dụ: Hãy kể chuyện Goku', required: true, type: 'body' },
         ],
-        baseUrl: `${BASE_URL}/api/chat`,
-        buildUrl: () => `${BASE_URL}/api/chat`,
+        baseUrl: `${BASE_URL}/api/goku`,
+        buildUrl: () => `${BASE_URL}/api/goku`,
         buildBody: (params) => JSON.stringify({ prompt: params.prompt }),
-        curlExample: `curl -X POST ${BASE_URL}/api/chat \\
+        curlExample: `curl -X POST ${BASE_URL}/api/goku \\
 -H "Content-Type: application/json" \\
 -d '{"prompt": "Xin chào"}'`,
-        jsExample: `const res = await fetch('${BASE_URL}/api/chat', {
+        jsExample: `const res = await fetch('${BASE_URL}/api/goku', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ prompt: "Xin chào" })
@@ -42,6 +42,58 @@ const API_DATA = [
 const result = await res.json();
 // Lấy câu trả lời:
 console.log(result.reply);`,
+      },
+      {
+        id: 'api-vegeta',
+        name: 'Hỏi đáp với Vegeta',
+        method: 'POST',
+        url: '/api/vegeta',
+        description: 'Kết nối sức mạnh lượng tử của Vegeta (Key phụ độc lập).',
+        params: [{ key: 'prompt', label: 'Câu hỏi (Prompt)', placeholder: 'Ví dụ: Hãy kể chuyện Goku', required: true, type: 'body' }],
+        baseUrl: `${BASE_URL}/api/vegeta`,
+        buildUrl: () => `${BASE_URL}/api/vegeta`,
+        buildBody: (params) => JSON.stringify({ prompt: params.prompt }),
+        curlExample: `curl -X POST ${BASE_URL}/api/vegeta -H "Content-Type: application/json" -d '{"prompt": "Xin chào"}'`,
+        jsExample: `fetch('${BASE_URL}/api/vegeta', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: "Xin chào" }) });`,
+      },
+      {
+        id: 'api-broly',
+        name: 'Hỏi đáp với Broly',
+        method: 'POST',
+        url: '/api/broly',
+        description: 'Sử dụng sức mạnh hoang dã của Huyền thoại Broly.',
+        params: [{ key: 'prompt', label: 'Câu hỏi (Prompt)', placeholder: 'Ví dụ: Hãy kể chuyện Goku', required: true, type: 'body' }],
+        baseUrl: `${BASE_URL}/api/broly`,
+        buildUrl: () => `${BASE_URL}/api/broly`,
+        buildBody: (params) => JSON.stringify({ prompt: params.prompt }),
+        curlExample: `curl -X POST ${BASE_URL}/api/broly -H "Content-Type: application/json" -d '{"prompt": "Xin chào"}'`,
+        jsExample: `fetch('${BASE_URL}/api/broly', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: "Xin chào" }) });`,
+      },
+      {
+        id: 'api-gohan',
+        name: 'Hỏi đáp với Gohan',
+        method: 'POST',
+        url: '/api/gohan',
+        description: 'Triệu hồi sức mạnh tiềm ẩn của Son Gohan.',
+        params: [{ key: 'prompt', label: 'Câu hỏi (Prompt)', placeholder: 'Ví dụ: Hãy kể chuyện Goku', required: true, type: 'body' }],
+        baseUrl: `${BASE_URL}/api/gohan`,
+        buildUrl: () => `${BASE_URL}/api/gohan`,
+        buildBody: (params) => JSON.stringify({ prompt: params.prompt }),
+        curlExample: `curl -X POST ${BASE_URL}/api/gohan -H "Content-Type: application/json" -d '{"prompt": "Xin chào"}'`,
+        jsExample: `fetch('${BASE_URL}/api/gohan', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: "Xin chào" }) });`,
+      },
+      {
+        id: 'api-piccolo',
+        name: 'Hỏi đáp với Piccolo',
+        method: 'POST',
+        url: '/api/piccolo',
+        description: 'Tận dụng trí tuệ chiến thuật của Namekian Piccolo.',
+        params: [{ key: 'prompt', label: 'Câu hỏi (Prompt)', placeholder: 'Ví dụ: Hãy kể chuyện Goku', required: true, type: 'body' }],
+        baseUrl: `${BASE_URL}/api/piccolo`,
+        buildUrl: () => `${BASE_URL}/api/piccolo`,
+        buildBody: (params) => JSON.stringify({ prompt: params.prompt }),
+        curlExample: `curl -X POST ${BASE_URL}/api/piccolo -H "Content-Type: application/json" -d '{"prompt": "Xin chào"}'`,
+        jsExample: `fetch('${BASE_URL}/api/piccolo', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: "Xin chào" }) });`,
       }
     ],
   },
@@ -252,8 +304,6 @@ function openModal(epId) {
   if (!ep) return;
   currentEndpoint = ep;
 
-  document.getElementById('modalMethod').className = `method-badge ${ep.method}`;
-  document.getElementById('modalMethod').textContent = ep.method;
   document.getElementById('modalEndpointName').textContent = ep.name;
   document.getElementById('modalDesc').textContent = ep.description;
   
@@ -283,12 +333,7 @@ function openModal(epId) {
 }
 
 function updateModalUrl() {
-  if (!currentEndpoint) return;
-  const params = {};
-  document.querySelectorAll('#modalParams input, #modalParams textarea').forEach(input => {
-    params[input.dataset.key] = input.value;
-  });
-  document.getElementById('modalUrl').textContent = currentEndpoint.buildUrl(params);
+  // Modal URL has been removed
 }
 
 function closeModal() {
@@ -335,12 +380,16 @@ async function sendRequest() {
     const res = await fetch(url, options);
     const elapsed = Date.now() - startTime;
     
+    const textData = await res.text();
+    
     // Attempt to parse JSON
     let data;
+    let isJson = false;
     try {
-      data = await res.json();
+      data = JSON.parse(textData);
+      isJson = true;
     } catch {
-      data = { raw: "Không thể parse JSON hoặc Server trả về rỗng." };
+      data = textData || "Không có phản hồi từ server.";
     }
 
     const statusBadge = document.getElementById('modalStatusBadge');
@@ -348,15 +397,19 @@ async function sendRequest() {
     statusBadge.className = `status-badge-modal ${res.ok ? 'ok' : 'err'}`;
     document.getElementById('modalTimeBadge').textContent = `${elapsed}ms`;
     
-    // Nếu có mã QR, GHI ĐÈ toàn bộ để chỉ hiển thị ảnh mã QR thật to và rõ
-    if (data && data.data && data.data.qr_code) {
+    // Nếu có mã QR
+    if (isJson && data && data.data && data.data.qr_code) {
       document.getElementById('modalResponseCode').innerHTML = `
         <div style="display: flex; justify-content: center; align-items: center; padding: 20px 0;">
           <img src="${data.data.qr_code}" alt="QR Code" style="width: 280px; height: 280px; object-fit: contain; border-radius: 16px; border: 4px solid #ff007f; box-shadow: 0 0 30px rgba(255,0,127,0.8);" />
         </div>
       `;
     } else {
-      document.getElementById('modalResponseCode').innerHTML = jsonSyntaxHighlight(data);
+      if (isJson) {
+        document.getElementById('modalResponseCode').innerHTML = jsonSyntaxHighlight(data);
+      } else {
+        document.getElementById('modalResponseCode').textContent = data;
+      }
     }
     
     document.getElementById('modalResponse').classList.remove('hidden');
@@ -406,12 +459,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Modal events
   document.getElementById('modalClose').addEventListener('click', closeModal);
   document.getElementById('modalSendBtn').addEventListener('click', sendRequest);
-  document.getElementById('modalCopyUrl').addEventListener('click', () => {
-    copyToClipboard(document.getElementById('modalUrl').textContent, document.getElementById('modalCopyUrl'));
-  });
+  
   document.getElementById('copyResponseBtn').addEventListener('click', () => {
     copyToClipboard(document.getElementById('modalResponseCode').textContent, document.getElementById('copyResponseBtn'));
   });
+
+  // Desktop sidebar toggle
+  const desktopToggle = document.getElementById('desktopSidebarToggle');
+  if (desktopToggle) {
+    desktopToggle.addEventListener('click', () => {
+      document.body.classList.toggle('sidebar-collapsed');
+    });
+  }
 
   // Sidebar events
   document.getElementById('menuToggle').addEventListener('click', openSidebar);

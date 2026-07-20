@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Super Saiyan Rosé API Hub</title>
-  <meta name="description" content="Nền tảng cung cấp API Cửu Vĩ (Gemini) và Zeni Pay. Dùng ngay không cần đăng ký.">
+  <title>Super Saiyan Rosé API</title>
+  <meta name="description" content="Nền tảng cung cấp API Cửu Vĩ (Shenron) và Zeni Pay. Dùng ngay không cần đăng ký.">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,7 +39,7 @@
   </div>
 
   <!-- ══════════════ SIDEBAR ══════════════ -->
-  <aside id="sidebar" class="glass-panel">
+  <aside id="sidebar">
     <div class="sidebar-header">
       <div class="sidebar-logo">
         <div class="dragon-ball small">
@@ -70,6 +70,10 @@
     </nav>
   </aside>
 
+  <button id="desktopSidebarToggle" class="desktop-sidebar-toggle" title="Thu gọn/Mở rộng Sidebar">
+    <i class="fas fa-caret-left"></i>
+  </button>
+
   <!-- Overlay (mobile) -->
   <div id="sidebarOverlay" class="sidebar-overlay"></div>
 
@@ -77,6 +81,11 @@
   <audio id="bgMusic" loop preload="auto">
     <source src="Fractures.mp3" type="audio/mpeg">
   </audio>
+
+  <!-- Video Background -->
+  <video id="bgVideo" autoplay loop muted playsinline>
+    <source src="videobackground.mp4" type="video/mp4">
+  </video>
 
   <!-- ══════════════ MAIN WRAPPER ══════════════ -->
   <div class="main-wrapper" id="mainWrapper">
@@ -89,7 +98,10 @@
 
       <div class="header-brand">
         <div class="dragon-ball small"><span>★</span></div>
-        <span class="brand-text">Super Saiyan Rosé <strong>API Hub</strong></span>
+        <span class="brand-text">Super Saiyan Rosé <strong>API</strong></span>
+        <div class="dev-fire-badge">
+          <span class="dev-fire-text"><i class="fas fa-crown"></i> DEV TÙNG LÊ</span>
+        </div>
       </div>
 
       <div class="header-right" style="display: flex; align-items: center;">
@@ -116,7 +128,7 @@
           <span class="hero-badge-dot" style="background: #27ae60; box-shadow: 0 0 10px #27ae60;"></span>
           CORS Enabled - Dùng trực tiếp trên Browser
         </div>
-        <h1 class="hero-title">Super Saiyan Rosé <span class="hero-highlight">API Hub</span></h1>
+        <h1 class="hero-title">Super Saiyan Rosé <span class="hero-highlight">API</span></h1>
         <p class="hero-desc">
           Tài nguyên API cực mạnh dành cho lập trình viên. 
           Sử dụng trực tiếp Rosé AI Brain và Cổng thanh toán Rosé Pay cho dự án của bạn mà không cần phải đi đâu cả!
@@ -132,35 +144,25 @@
       <!-- GETTING STARTED -->
       <section id="getting-started" class="content-section">
         <div class="section-title-row">
-          <h2 class="section-title"><i class="fas fa-fist-raised"></i> Sức mạnh của Hub</h2>
+          <h2 class="section-title"><i class="fas fa-fist-raised"></i> Sức mạnh của API</h2>
         </div>
 
         <div class="info-cards-grid">
-          <div class="info-card glass-panel">
-            <div class="info-card-icon">🤖</div>
-            <h3>Gemini AI (Proxy)</h3>
-            <p>Trò chuyện với AI cực thông minh. Gọi trực tiếp qua API của chúng tôi, không cần copy paste Google API Key lằng nhằng.</p>
+          <div class="info-card" onclick="document.getElementById('cat-gemini').scrollIntoView({behavior: 'smooth'})">
+            <div class="info-card-icon">🌹</div>
+            <h3>Rosé AI Brain</h3>
+            <p>Trò chuyện với bộ não thần thánh của Rosé AI. Gọi trực tiếp qua API của chúng tôi, bảo mật tuyệt đối không cần copy paste lằng nhằng.</p>
           </div>
-          <div class="info-card glass-panel">
-            <div class="info-card-icon">💰</div>
-            <h3>Zeni Pay</h3>
-            <p>Hệ thống giả lập thanh toán Zeni. Tạo mã QR và kiểm tra trạng thái giao dịch một cách chuyên nghiệp.</p>
+          <div class="info-card" onclick="document.getElementById('cat-zenipay').scrollIntoView({behavior: 'smooth'})">
+            <div class="info-card-icon">💎</div>
+            <h3>Rosé Pay</h3>
+            <p>Hệ thống giả lập thanh toán quyền năng. Tạo mã QR và kiểm tra trạng thái giao dịch một cách chuyên nghiệp.</p>
           </div>
-          <div class="info-card glass-panel">
+          <div class="info-card" onclick="document.getElementById('api-list').scrollIntoView({behavior: 'smooth'})">
             <div class="info-card-icon">⚡</div>
             <h3>Test trực tiếp</h3>
-            <p>Nhấn <strong>"Bắn Black Kamehameha" (Test)</strong> trên web để xem ngay kết quả JSON trả về. Cực kỳ đơn giản.</p>
+            <p>Nhấn <strong>"Bắn Black Kamehameha" (Test)</strong> ở các API bên dưới để xem ngay mã QR và kết quả JSON trả về. Cực kỳ đơn giản.</p>
           </div>
-        </div>
-
-        <div class="base-url-box glass-panel">
-          <p class="base-url-label"><i class="fas fa-server"></i> Máy chủ API (Base URL)</p>
-          <div class="code-block">
-            <pre class="code-block-body"><code>http://127.0.0.1:3000</code></pre>
-          </div>
-          <p style="font-size: 0.85rem; color: #f39c12; margin-top: 10px; font-weight: bold;">
-            * Đảm bảo bạn đang chạy "node server.js" ở thư mục backend để gọi các API này.
-          </p>
         </div>
       </section>
 
@@ -174,7 +176,7 @@
     <!-- ══════════════ FOOTER ══════════════ -->
     <footer class="site-footer glass-panel-flat">
       <div class="footer-inner">
-        <p>© 2026 Super Saiyan Rosé API Hub. Divine Power.</p>
+        <p>© 2026 Super Saiyan Rosé API. Divine Power.</p>
       </div>
     </footer>
 
@@ -185,23 +187,13 @@
     <div class="modal-box glass-panel">
       <div class="modal-header">
         <div>
-          <span id="modalMethod" class="method-badge">POST</span>
-          <span id="modalEndpointName" class="modal-name"></span>
+          <span id="modalEndpointName" class="modal-name" style="font-size: 1.5rem; font-weight: 900; color: var(--primary-color);"></span>
         </div>
         <button id="modalClose" class="modal-close-btn"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
         <p id="modalDesc" class="modal-desc"></p>
 
-        <div class="modal-url-row">
-          <label>URL Endpoint</label>
-          <div class="modal-url-display">
-            <code id="modalUrl"></code>
-            <button class="copy-url-btn" id="modalCopyUrl" title="Sao chép URL">
-              <i class="fas fa-copy"></i>
-            </button>
-          </div>
-        </div>
 
         <!-- Dynamic params/body -->
         <div id="modalParams" class="modal-params"></div>
