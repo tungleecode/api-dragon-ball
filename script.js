@@ -27,10 +27,12 @@ const API_DATA = [
         description: 'Gửi một câu hỏi (prompt) lên server và nhận phản hồi trí tuệ từ Rosé.',
         params: [
           { key: 'prompt', label: 'Câu hỏi (Prompt)', placeholder: 'Ví dụ: Hãy kể chuyện Goku', required: true, type: 'body' },
+          { key: 'systemInstruction', label: 'Hành vi AI (System Instruction)', placeholder: 'Ví dụ: Bạn là giáo viên toán', required: false, type: 'body' },
+          { key: 'isJsonMode', label: 'Ép trả về JSON', placeholder: 'true', required: false, type: 'body' }
         ],
         baseUrl: `${BASE_URL}/api/goku`,
         buildUrl: () => `${BASE_URL}/api/goku`,
-        buildBody: (params) => JSON.stringify({ prompt: params.prompt }),
+        buildBody: (params) => JSON.stringify({ prompt: params.prompt, systemInstruction: params.systemInstruction, isJsonMode: params.isJsonMode }),
         curlExample: `curl -X POST ${BASE_URL}/api/goku \\
 -H "Content-Type: application/json" \\
 -d '{"prompt": "Xin chào"}'`,
@@ -41,7 +43,7 @@ const API_DATA = [
 });
 const result = await res.json();
 // Lấy câu trả lời:
-console.log(result.reply);`,
+console.log(result.data);`,
       },
       {
         id: 'api-vegeta',
@@ -49,10 +51,14 @@ console.log(result.reply);`,
         method: 'POST',
         url: '/api/vegeta',
         description: 'Kết nối sức mạnh lượng tử của Vegeta (Key phụ độc lập).',
-        params: [{ key: 'prompt', label: 'Câu hỏi (Prompt)', placeholder: 'Ví dụ: Hãy kể chuyện Goku', required: true, type: 'body' }],
+        params: [
+          { key: 'prompt', label: 'Câu hỏi (Prompt)', placeholder: 'Ví dụ: Hãy kể chuyện Goku', required: true, type: 'body' },
+          { key: 'systemInstruction', label: 'Hành vi AI (System Instruction)', placeholder: 'Ví dụ: Bạn là giáo viên toán', required: false, type: 'body' },
+          { key: 'isJsonMode', label: 'Ép trả về JSON', placeholder: 'true', required: false, type: 'body' }
+        ],
         baseUrl: `${BASE_URL}/api/vegeta`,
         buildUrl: () => `${BASE_URL}/api/vegeta`,
-        buildBody: (params) => JSON.stringify({ prompt: params.prompt }),
+        buildBody: (params) => JSON.stringify({ prompt: params.prompt, systemInstruction: params.systemInstruction, isJsonMode: params.isJsonMode }),
         curlExample: `curl -X POST ${BASE_URL}/api/vegeta -H "Content-Type: application/json" -d '{"prompt": "Xin chào"}'`,
         jsExample: `fetch('${BASE_URL}/api/vegeta', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: "Xin chào" }) });`,
       },
@@ -62,10 +68,14 @@ console.log(result.reply);`,
         method: 'POST',
         url: '/api/broly',
         description: 'Sử dụng sức mạnh hoang dã của Huyền thoại Broly.',
-        params: [{ key: 'prompt', label: 'Câu hỏi (Prompt)', placeholder: 'Ví dụ: Hãy kể chuyện Goku', required: true, type: 'body' }],
+        params: [
+          { key: 'prompt', label: 'Câu hỏi (Prompt)', placeholder: 'Ví dụ: Hãy kể chuyện Goku', required: true, type: 'body' },
+          { key: 'systemInstruction', label: 'Hành vi AI (System Instruction)', placeholder: 'Ví dụ: Bạn là giáo viên toán', required: false, type: 'body' },
+          { key: 'isJsonMode', label: 'Ép trả về JSON', placeholder: 'true', required: false, type: 'body' }
+        ],
         baseUrl: `${BASE_URL}/api/broly`,
         buildUrl: () => `${BASE_URL}/api/broly`,
-        buildBody: (params) => JSON.stringify({ prompt: params.prompt }),
+        buildBody: (params) => JSON.stringify({ prompt: params.prompt, systemInstruction: params.systemInstruction, isJsonMode: params.isJsonMode }),
         curlExample: `curl -X POST ${BASE_URL}/api/broly -H "Content-Type: application/json" -d '{"prompt": "Xin chào"}'`,
         jsExample: `fetch('${BASE_URL}/api/broly', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: "Xin chào" }) });`,
       },
@@ -75,10 +85,14 @@ console.log(result.reply);`,
         method: 'POST',
         url: '/api/gohan',
         description: 'Triệu hồi sức mạnh tiềm ẩn của Son Gohan.',
-        params: [{ key: 'prompt', label: 'Câu hỏi (Prompt)', placeholder: 'Ví dụ: Hãy kể chuyện Goku', required: true, type: 'body' }],
+        params: [
+          { key: 'prompt', label: 'Câu hỏi (Prompt)', placeholder: 'Ví dụ: Hãy kể chuyện Goku', required: true, type: 'body' },
+          { key: 'systemInstruction', label: 'Hành vi AI (System Instruction)', placeholder: 'Ví dụ: Bạn là giáo viên toán', required: false, type: 'body' },
+          { key: 'isJsonMode', label: 'Ép trả về JSON', placeholder: 'true', required: false, type: 'body' }
+        ],
         baseUrl: `${BASE_URL}/api/gohan`,
         buildUrl: () => `${BASE_URL}/api/gohan`,
-        buildBody: (params) => JSON.stringify({ prompt: params.prompt }),
+        buildBody: (params) => JSON.stringify({ prompt: params.prompt, systemInstruction: params.systemInstruction, isJsonMode: params.isJsonMode }),
         curlExample: `curl -X POST ${BASE_URL}/api/gohan -H "Content-Type: application/json" -d '{"prompt": "Xin chào"}'`,
         jsExample: `fetch('${BASE_URL}/api/gohan', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: "Xin chào" }) });`,
       },
@@ -88,10 +102,14 @@ console.log(result.reply);`,
         method: 'POST',
         url: '/api/piccolo',
         description: 'Tận dụng trí tuệ chiến thuật của Namekian Piccolo.',
-        params: [{ key: 'prompt', label: 'Câu hỏi (Prompt)', placeholder: 'Ví dụ: Hãy kể chuyện Goku', required: true, type: 'body' }],
+        params: [
+          { key: 'prompt', label: 'Câu hỏi (Prompt)', placeholder: 'Ví dụ: Hãy kể chuyện Goku', required: true, type: 'body' },
+          { key: 'systemInstruction', label: 'Hành vi AI (System Instruction)', placeholder: 'Ví dụ: Bạn là giáo viên toán', required: false, type: 'body' },
+          { key: 'isJsonMode', label: 'Ép trả về JSON', placeholder: 'true', required: false, type: 'body' }
+        ],
         baseUrl: `${BASE_URL}/api/piccolo`,
         buildUrl: () => `${BASE_URL}/api/piccolo`,
-        buildBody: (params) => JSON.stringify({ prompt: params.prompt }),
+        buildBody: (params) => JSON.stringify({ prompt: params.prompt, systemInstruction: params.systemInstruction, isJsonMode: params.isJsonMode }),
         curlExample: `curl -X POST ${BASE_URL}/api/piccolo -H "Content-Type: application/json" -d '{"prompt": "Xin chào"}'`,
         jsExample: `fetch('${BASE_URL}/api/piccolo', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: "Xin chào" }) });`,
       }
