@@ -50,7 +50,11 @@ app.post('/api/chat', async (req, res) => {
         console.error("Gemini API Error:", error);
         res.status(500).json({ 
             success: false, 
-            error: { code: 500, message: 'Lỗi máy chủ khi gọi Gemini API. Hãy kiểm tra lại cấu hình.' } 
+            error: { 
+                code: 500, 
+                message: 'Lỗi máy chủ khi gọi Gemini API. Hãy kiểm tra lại cấu hình.',
+                details: error.message || error.toString()
+            } 
         });
     }
 });
