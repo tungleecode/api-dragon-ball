@@ -60,16 +60,11 @@ console.log(result.reply);`,
         description: 'Tạo một giao dịch mới với số tiền cụ thể. Trả về mã giao dịch và mã QR base64.',
         params: [
           { key: 'amount', label: 'Số tiền (VND)', placeholder: '500000', required: true, type: 'body' },
-          { key: 'api_key', label: 'API Key (Test)', placeholder: 'Nhập PAYOS_... nếu backend có check', required: false, type: 'header' },
         ],
         baseUrl: `${BASE_URL}/api/create-payment`,
         buildUrl: () => `${BASE_URL}/api/create-payment`,
         buildBody: (params) => JSON.stringify({ amount: parseInt(params.amount) || 500000 }),
-        buildHeaders: (params) => {
-          const h = { 'Content-Type': 'application/json' };
-          if (params.api_key) h['x-api-key'] = params.api_key;
-          return h;
-        },
+        buildHeaders: () => ({ 'Content-Type': 'application/json' }),
         curlExample: `curl -X POST ${BASE_URL}/api/create-payment \\
 -H "Content-Type: application/json" \\
 -d '{"amount": 500000}'`,
