@@ -32,26 +32,36 @@ app.post('/api/chat', async (req, res) => {
             const response = await result.response;
             const text = response.text();
 
+            // Return in official Gemini REST API format
             return res.json({
-                success: true,
-                data: {
-                    mode: 'real',
-                    reply: text
-                }
+                candidates: [
+                    {
+                        content: {
+                            parts: [{ text: text }],
+                            role: "model"
+                        },
+                        finishReason: "STOP",
+                        index: 0
+                    }
+                ]
             });
         } 
         
         else {
-            // Simulated Delay (1.5 seconds) for Mock Mode to feel real
+            // Simulated Delay (1.5 seconds) for Mock Mode
             await new Promise(resolve => setTimeout(resolve, 1500));
 
             return res.json({
-                success: true,
-                data: {
-                    mode: 'mock',
-                    note: 'Chưa cấu hình GEMINI_API_KEY. Đây là phản hồi giả lập (có độ trễ 1.5s).',
-                    reply: `(Giả lập) Chào bạn! Tôi là Cửu Vĩ (Goku Black Mode). Bạn vừa nói: "${prompt}". Hãy nhập Google API Key để kích hoạt sức mạnh thực sự!`
-                }
+                candidates: [
+                    {
+                        content: {
+                            parts: [{ text: "Đây là phản hồi giả lập vì máy chủ chưa được cấu hình GEMINI_API_KEY. Vui lòng thiết lập biến môi trường trên Vercel để kết nối với AI thực tế." }],
+                            role: "model"
+                        },
+                        finishReason: "STOP",
+                        index: 0
+                    }
+                ]
             });
         }
     } catch (error) {

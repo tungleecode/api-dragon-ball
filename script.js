@@ -40,7 +40,8 @@ const API_DATA = [
   body: JSON.stringify({ prompt: "Xin chào" })
 });
 const result = await res.json();
-console.log(result.data.reply);`,
+// Lấy câu trả lời theo chuẩn cấu trúc JSON gốc của Gemini:
+console.log(result.candidates[0].content.parts[0].text);`,
       }
     ],
   },
