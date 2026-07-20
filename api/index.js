@@ -32,18 +32,9 @@ app.post('/api/chat', async (req, res) => {
             const response = await result.response;
             const text = response.text();
 
-            // Return in official Gemini REST API format
+            // Trả về JSON cực kỳ đơn giản theo ý bạn
             return res.json({
-                candidates: [
-                    {
-                        content: {
-                            parts: [{ text: text }],
-                            role: "model"
-                        },
-                        finishReason: "STOP",
-                        index: 0
-                    }
-                ]
+                reply: text
             });
         } 
         
@@ -52,16 +43,7 @@ app.post('/api/chat', async (req, res) => {
             await new Promise(resolve => setTimeout(resolve, 1500));
 
             return res.json({
-                candidates: [
-                    {
-                        content: {
-                            parts: [{ text: "Đây là phản hồi giả lập vì máy chủ chưa được cấu hình GEMINI_API_KEY. Vui lòng thiết lập biến môi trường trên Vercel để kết nối với AI thực tế." }],
-                            role: "model"
-                        },
-                        finishReason: "STOP",
-                        index: 0
-                    }
-                ]
+                reply: "Đây là phản hồi giả lập vì máy chủ chưa được cấu hình GEMINI_API_KEY. Vui lòng thiết lập biến môi trường trên Vercel để kết nối với AI thực tế."
             });
         }
     } catch (error) {
