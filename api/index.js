@@ -27,8 +27,15 @@ app.post('/api/chat', async (req, res) => {
 
         if (apiKey) {
             const genAI = new GoogleGenerativeAI(apiKey);
-            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-            const result = await model.generateContent(prompt);
+            let result;
+            try {
+                const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+                result = await model.generateContent(prompt);
+            } catch (err) {
+                // Fallback to gemini-pro if 1.5 flash is not available for this key
+                const modelFallback = genAI.getGenerativeModel({ model: "gemini-pro" });
+                result = await modelFallback.generateContent(prompt);
+            }
             const response = await result.response;
             const text = response.text();
 
