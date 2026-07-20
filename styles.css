@@ -301,3 +301,30 @@ main { flex: 1; padding: 3rem 2rem; max-width: 1000px; margin: 0 auto; width: 10
   .endpoint-url { width: 100%; order: 3; margin-top: 10px;}
   .modal-box { max-height: 100vh; border-radius: 0; border: none;}
 }
+
+/* ══════════════════════════════════════════
+   MUSIC TOGGLE BUTTON
+══════════════════════════════════════════ */
+.music-toggle-btn {
+  background: rgba(255, 0, 127, 0.1);
+  border: 1px solid rgba(255, 0, 127, 0.4);
+  color: var(--primary);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 15px;
+}
+.music-toggle-btn:hover {
+  background: rgba(255, 0, 127, 0.3);
+  transform: scale(1.1);
+}
+.music-toggle-btn.muted {
+  color: #a5b1c2;
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+}

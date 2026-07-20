@@ -73,6 +73,11 @@
   <!-- Overlay (mobile) -->
   <div id="sidebarOverlay" class="sidebar-overlay"></div>
 
+  <!-- BGM Audio -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="Fractures.mp3" type="audio/mpeg">
+  </audio>
+
   <!-- ══════════════ MAIN WRAPPER ══════════════ -->
   <div class="main-wrapper" id="mainWrapper">
 
@@ -87,7 +92,10 @@
         <span class="brand-text">Super Saiyan Rosé <strong>API Hub</strong></span>
       </div>
 
-      <div class="header-right">
+      <div class="header-right" style="display: flex; align-items: center;">
+        <button id="musicToggleBtn" class="music-toggle-btn" aria-label="Tắt/Bật Nhạc" title="Bật/Tắt Nhạc">
+          <i class="fas fa-volume-up"></i>
+        </button>
         <div class="online-badge">
           <span class="online-dot"></span>
           <span>Sẵn sàng chiến đấu</span>
@@ -111,7 +119,7 @@
         <h1 class="hero-title">Super Saiyan Rosé <span class="hero-highlight">API Hub</span></h1>
         <p class="hero-desc">
           Tài nguyên API cực mạnh dành cho lập trình viên. 
-          Sử dụng trực tiếp Gemini AI và Cổng thanh toán Zeni Pay cho dự án của bạn mà không cần phải đi đâu cả!
+          Sử dụng trực tiếp Rosé AI Brain và Cổng thanh toán Rosé Pay cho dự án của bạn mà không cần phải đi đâu cả!
         </p>
 
         <div class="hero-actions">

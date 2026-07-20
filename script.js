@@ -15,16 +15,16 @@ if (BASE_URL === 'file://' || BASE_URL === 'null') {
 const API_DATA = [
   {
     id: 'gemini',
-    emoji: '🤖',
-    name: 'Gemini AI (Proxy)',
-    description: 'Trò chuyện với Cửu Vĩ (Gemini) cực thông minh. Gọi trực tiếp API này để không lộ Key Google.',
+    emoji: '🌹',
+    name: 'Rosé AI Brain',
+    description: 'Kết nối với bộ não thần thánh của Rosé AI. Đóng vai trò Proxy giúp bảo mật tuyệt đối hệ thống.',
     endpoints: [
       {
         id: 'gemini-chat',
         name: 'Gửi tin nhắn (Chat)',
         method: 'POST',
         url: '/api/chat', // Tương lai bạn sẽ tạo route này ở backend
-        description: 'Gửi một câu hỏi (prompt) lên server và nhận phản hồi từ Gemini.',
+        description: 'Gửi một câu hỏi (prompt) lên server và nhận phản hồi trí tuệ từ Rosé.',
         params: [
           { key: 'prompt', label: 'Câu hỏi (Prompt)', placeholder: 'Ví dụ: Hãy kể chuyện Goku', required: true, type: 'body' },
         ],
@@ -48,9 +48,9 @@ console.log(result.reply);`,
 
   {
     id: 'zenipay',
-    emoji: '💰',
-    name: 'Zeni Pay',
-    description: 'Hệ thống giả lập thanh toán. Khởi tạo giao dịch để lấy mã QR và kiểm tra trạng thái.',
+    emoji: '💎',
+    name: 'Rosé Pay',
+    description: 'Hệ thống giả lập thanh toán quyền năng. Khởi tạo giao dịch để lấy mã QR và kiểm tra trạng thái.',
     endpoints: [
       {
         id: 'zeni-create',
@@ -343,24 +343,21 @@ async function sendRequest() {
       data = { raw: "Không thể parse JSON hoặc Server trả về rỗng." };
     }
 
-    let extraHtml = '';
-    // Nếu có mã QR, hiển thị ảnh thật và rút gọn chuỗi base64 trong JSON cho đỡ rối mắt
-    if (data && data.data && data.data.qr_code) {
-      extraHtml = `
-        <div style="margin-top: 20px; text-align: center; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
-          <p style="color: #2ecc71; margin-bottom: 15px; font-weight: bold;"><i class="fas fa-qrcode"></i> Quét mã này để Test thanh toán giả lập:</p>
-          <img src="${data.data.qr_code}" alt="QR Code" style="max-width: 200px; border-radius: 10px; border: 3px solid #ff007f; box-shadow: 0 0 15px rgba(255,0,127,0.5);" />
-        </div>
-      `;
-      // Rút gọn chuỗi để JSON dễ nhìn
-      data.data.qr_code = data.data.qr_code.substring(0, 35) + '... (đã rút gọn chuỗi ảnh để dễ nhìn)';
-    }
-
     const statusBadge = document.getElementById('modalStatusBadge');
     statusBadge.textContent = `${res.status} ${res.statusText}`;
     statusBadge.className = `status-badge-modal ${res.ok ? 'ok' : 'err'}`;
     document.getElementById('modalTimeBadge').textContent = `${elapsed}ms`;
-    document.getElementById('modalResponseCode').innerHTML = jsonSyntaxHighlight(data) + extraHtml;
+    
+    // Nếu có mã QR, GHI ĐÈ toàn bộ để chỉ hiển thị ảnh mã QR thật to và rõ
+    if (data && data.data && data.data.qr_code) {
+      document.getElementById('modalResponseCode').innerHTML = `
+        <div style="display: flex; justify-content: center; align-items: center; padding: 20px 0;">
+          <img src="${data.data.qr_code}" alt="QR Code" style="width: 280px; height: 280px; object-fit: contain; border-radius: 16px; border: 4px solid #ff007f; box-shadow: 0 0 30px rgba(255,0,127,0.8);" />
+        </div>
+      `;
+    } else {
+      document.getElementById('modalResponseCode').innerHTML = jsonSyntaxHighlight(data);
+    }
     
     document.getElementById('modalResponse').classList.remove('hidden');
   } catch (err) {
@@ -433,4 +430,42 @@ document.addEventListener('DOMContentLoaded', () => {
       if (link.dataset.section === current) link.classList.add('active');
     });
   });
+
+  // ══════════════════════════════════════════
+  //  AUDIO LOGIC
+  // ══════════════════════════════════════════
+  const bgMusic = document.getElementById('bgMusic');
+  const musicToggleBtn = document.getElementById('musicToggleBtn');
+  let isMusicPlaying = false;
+  let hasUserInteracted = false;
+
+  bgMusic.volume = 0.5; // Giảm âm lượng 50%
+
+  // Phát nhạc khi người dùng tương tác lần đầu
+  document.body.addEventListener('click', () => {
+    if (!hasUserInteracted) {
+      hasUserInteracted = true;
+      bgMusic.play().then(() => {
+        isMusicPlaying = true;
+        musicToggleBtn.classList.remove('muted');
+        musicToggleBtn.querySelector('i').className = 'fas fa-volume-up';
+      }).catch(err => console.log('Audio blocked by browser:', err));
+    }
+  }, { once: true });
+
+  // Xử lý nút tắt/bật nhạc
+  musicToggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    hasUserInteracted = true;
+    if (bgMusic.paused) {
+      bgMusic.play();
+      musicToggleBtn.classList.remove('muted');
+      musicToggleBtn.querySelector('i').className = 'fas fa-volume-up';
+    } else {
+      bgMusic.pause();
+      musicToggleBtn.classList.add('muted');
+      musicToggleBtn.querySelector('i').className = 'fas fa-volume-mute';
+    }
+  });
+
 });
